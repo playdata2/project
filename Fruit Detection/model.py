@@ -104,7 +104,7 @@ class ScalePrediction(nn.Module):
 
 
 class YOLOv3(nn.Module):
-    def __init__(self, in_channels=1024, num_classes=11, backbone='darknet53', pretrained_weight='darknet53_pretrained.pth.tar'):
+    def __init__(self, in_channels=1024, num_classes=11, backbone='darknet53', pretrained_weight=''):
         super().__init__()
         self.num_classes = num_classes
         self.in_channels = in_channels
