@@ -39,7 +39,7 @@ class DarkResidualBlock(nn.Module):
         return out
 
 class Darknet53(nn.Module):
-    def __init__(self, block, device, pretrained_weight='../darknet53_pretrained.pth.tar', ):
+    def __init__(self, block, device, pretrained_weight='', ):
         super(Darknet53, self).__init__()
         self.device = device
 

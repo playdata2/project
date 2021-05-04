@@ -13,10 +13,13 @@ import time
 from flask import Flask, render_template, Response, jsonify, url_for,request, redirect
 import pandas as pd
 import secrets
+from flask_ngrok import run_with_ngrok
+
 
 
 datas = pd.read_excel('static/market_price.xlsx', engine='openpyxl')
 app = Flask(__name__, static_url_path='/static')  # static 경로 선언
+run_with_ngrok(app)
 
 # secret Key
 app.config["SECRET_KEY"] = secrets.token_hex(16)
@@ -123,7 +126,7 @@ def detect(save_img=False):
 
             #boxes = non_max_suppression(boxes, iou_threshold=config.NMS_IOU_THRESH, threshold=config.CONF_THRESHOLD, box_format='midpoint')
             boxes = my_non_max_suppression(boxes, iou_threshold=0.3, threshold=config.CONF_THRESHOLD, score_threshold=0.3, box_format='midpoint', method='greedy')
-            #boxes = [box for box in boxes if box[1] > 0.3]  # nms에서 0.0인 confidence가 안사라지는 박스들이 있음
+            boxes = [box for box in boxes if box[1] > 0.3]  # nms에서 0.0인 confidence가 안사라지는 박스들이 있음
             # print(len(boxes))
             # boxes : [[class_pred, prob_score, x1, y1, x2, y2], ...]
 
@@ -161,4 +164,5 @@ if __name__ == '__main__':
     scaled_anchors = torch.tensor(config.ANCHORS) * torch.tensor(S).unsqueeze(1).unsqueeze(1).repeat(1, 3, 2)  # (3, 3, 2)
     scaled_anchors = scaled_anchors.to(config.DEVICE)
 
-    app.run(debug=True, port='7000')
+
+    app.run()
