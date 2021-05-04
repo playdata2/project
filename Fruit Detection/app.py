@@ -150,7 +150,11 @@ def detect(save_img=False):
             yield (b'--frame\r\n' b'Content-Type: image/jpeg\r\n\r\n' + bytearray(encodedImage) + b'\r\n')
 
 if __name__ == '__main__':
-    cap = cv2.VideoCapture(-1)
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--video-file', type=str, default="", help='video path')
+    opt = parser.parse_args()
+
+    cap = cv2.VideoCapture(opt.video_file)
     torch.backends.cudnn.benchmark = True
     model = YOLOv3(num_classes=config.NUM_CLASSES, backbone='darknet53').to(config.DEVICE)
     checkpoint = torch.load('checkpoint.pth.tar', map_location=config.DEVICE)
@@ -163,6 +167,5 @@ if __name__ == '__main__':
     S = [13, 26, 52]
     scaled_anchors = torch.tensor(config.ANCHORS) * torch.tensor(S).unsqueeze(1).unsqueeze(1).repeat(1, 3, 2)  # (3, 3, 2)
     scaled_anchors = scaled_anchors.to(config.DEVICE)
-
 
     app.run()
