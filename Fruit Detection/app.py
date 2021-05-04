@@ -150,7 +150,7 @@ def detect(save_img=False):
             yield (b'--frame\r\n' b'Content-Type: image/jpeg\r\n\r\n' + bytearray(encodedImage) + b'\r\n')
 
 if __name__ == '__main__':
-    cap = cv2.VideoCapture(0)
+    cap = cv2.VideoCapture(-1)
     torch.backends.cudnn.benchmark = True
     model = YOLOv3(num_classes=config.NUM_CLASSES, backbone='darknet53').to(config.DEVICE)
     checkpoint = torch.load('checkpoint.pth.tar', map_location=config.DEVICE)

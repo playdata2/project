@@ -13,3 +13,4 @@ tqdm>=4.41.0
 albumentations==0.5.2
 torchsummary==1.5.1
 timm==0.4.5
+flask_ngrok==0.0.25
