@@ -103,7 +103,7 @@ def detect(save_img=False):
     global detected_labels
     global cam
 
-    pTime = 0
+    # pTime = 0
     if not cam:
         while True:
             ret, frame = cap.read()
@@ -131,10 +131,10 @@ def detect(save_img=False):
             # boxes : [[class_pred, prob_score, x1, y1, x2, y2], ...]
 
             image = show_image(frame, boxes, colors)
-            cTime = time.time()
-            fps = 1 / (cTime - pTime)
-            pTime = cTime
-            cv2.putText(image, f'FPS: {int(fps)}', (10,30), cv2.FONT_HERSHEY_PLAIN, 2, (0, 255, 0), 2,lineType=cv2.LINE_AA)
+            # cTime = time.time()
+            # fps = 1 / (cTime - pTime)
+            # pTime = cTime
+            # cv2.putText(image, f'FPS: {int(fps)}', (10,30), cv2.FONT_HERSHEY_PLAIN, 2, (0, 255, 0), 2,lineType=cv2.LINE_AA)
 
             if boxes:
                 boxes = np.array(boxes)
