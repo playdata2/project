@@ -145,7 +145,7 @@ def detect(save_img=False):
                     num = det_cls_list.count(i)
                     detected_labels.append({"name": i, "cnt": num})
 
-            image = imutils.resize(image, width=600)
+            # image = imutils.resize(image, width=500)
             (flag, encodedImage) = cv2.imencode('.jpg', image)
             yield (b'--frame\r\n' b'Content-Type: image/jpeg\r\n\r\n' + bytearray(encodedImage) + b'\r\n')
 
