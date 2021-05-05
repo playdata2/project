@@ -155,7 +155,10 @@ if __name__ == '__main__':
     opt = parser.parse_args()
 
     # cap = cv2.VideoCapture(opt.video_file)
-    cap = cv2.VideoCapture(0)
+    if opt.video_file:
+        cap = cv2.VideoCapture(opt.video_file)
+    else:
+        cap = cv2.VideoCapture(0)
     torch.backends.cudnn.benchmark = True
     model = YOLOv3(num_classes=config.NUM_CLASSES, backbone='darknet53').to(config.DEVICE)
     checkpoint = torch.load('checkpoint.pth.tar', map_location=config.DEVICE)
