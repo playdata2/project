@@ -425,7 +425,7 @@ def show_image(image, boxes, colors):
                     lineType=cv2.LINE_AA)
 
 
-    # image = cv2.resize(image, (480, 640))
+    image = cv2.resize(image, (480, 640))
     return image
 
 
